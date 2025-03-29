@@ -61,14 +61,23 @@ wsRef.current?.send(JSON.stringify({type:"move",direction:"moveLeft",id:user.use
 wsRef.current?.send(JSON.stringify({type:"move",direction:"moveRight",id:user.userId}))
     }
   }
+  console.log(players)
   return (
     <div>
       {players.map((p,index) => (
+        <>
         <div
           key={index}
-          className={`bg-green-500 h-3 w-3 rounded-full `}
+          className={`bg-green-500 h-3 w-3 rounded-full transition-transform ease-linear   will-change-transform  duration-100 `}
           style={{transform:`translate(${p.positions.x}px ,${p.positions.y}px)`}}
         ></div>
+        {
+           p.messageTrueFor === user.userId && <div className="absolute flex gap-2 bottom-5 left-[50%]">
+            <input placeholder="type message" className="bg-white  px-3 py-1 rounded-md" />
+            <button className="bg-pink-600 px-3 py-2 rounded-md">Send</button>
+           </div>
+        }
+        </>
       ))}
     </div>
   );
